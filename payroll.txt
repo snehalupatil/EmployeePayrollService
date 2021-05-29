@@ -1,7 +1,7 @@
 
 echo "Welcome to Employee Payroll Database"
 
-//---------UC1  Create Database------------
+//--------- UC1 --------------
 
 mysql> CREATE DATABASE payroll_service;
 Query OK, 1 row affected (1.05 sec)
@@ -29,7 +29,7 @@ mysql> select database();
 1 row in set (0.00 sec)
 
 
-//-------------UC2------------------
+//------------- UC2 ------------------
 
 mysql> CREATE TABLE employee_payroll
     -> (
