@@ -1,7 +1,7 @@
 
 echo "Welcome to Employee Payroll Database"
 
-//UC1  Create Database
+//---------UC1  Create Database------------
 
 mysql> CREATE DATABASE payroll_service;
 Query OK, 1 row affected (1.05 sec)
@@ -28,3 +28,26 @@ mysql> select database();
 +-----------------+
 1 row in set (0.00 sec)
 
+
+//-------------UC2------------------
+
+mysql> CREATE TABLE employee_payroll
+    -> (
+    -> id       INT unsigned NOT NULL AUTO_INCREMENT,
+    -> name     VARCHAR(150) NOT NULL,
+    -> salary   Double NOT NULL,
+    -> start    DATE NOT NULL,
+    -> PRIMARY KEY (id)
+    -> );
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> DESCRIBE employee_payroll;
++--------+------------------+------+-----+---------+----------------+
+| Field  | Type             | Null | Key | Default | Extra          |
++--------+------------------+------+-----+---------+----------------+
+| id     | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(150)     | NO   |     | NULL    |                |
+| salary | double           | NO   |     | NULL    |                |
+| start  | date             | NO   |     | NULL    |                |
++--------+------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
