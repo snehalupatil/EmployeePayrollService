@@ -283,3 +283,104 @@ mysql> SELECT * FROM employee_payroll;
 +----+---------+--------------+---------+------------+--------+-----------+-----------+-------------+---------+---------+------------+
 4 rows in set (0.00 sec)
 
+
+//-------------------UC11-----------------------
+
+mysql> CREATE TABLE employee
+    -> (
+    -> id INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> company_id INT REFERENCES company(company_id),
+    -> employee_name VARCHAR(50) NOT NULL,
+    -> phone_number BIGINT NOT NULL,
+    -> address VARCHAR(150) NOT NULL DEFAULT 'TBD',
+    -> gender CHAR(1) NOT NULL
+    -> );
+Query OK, 0 rows affected (2.53 sec)
+
+mysql> INSERT INTO employee VALUES
+    -> (101, 1, 'Bill', '9832781255', 'California','M'),
+    -> (102, 2, 'Charlie', '7823129021', 'NYC','M'),
+    -> (103, 3, 'Terissa', '8956328912', 'San Francisco','F');
+Query OK, 3 rows affected (0.52 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE company
+    -> (
+    -> company_id INT PRIMARY KEY,
+    -> company_name VARCHAR(100) NOT NULL);
+Query OK, 0 rows affected (1.36 sec)
+
+mysql> INSERT INTO company VALUES
+    -> (1,'AMAZON'),
+    -> (2,'FB'),
+    -> (3,'BL');
+Query OK, 3 rows affected (0.10 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE department
+    -> (
+    -> department_id INT PRIMARY KEY,
+    -> department_name VARCHAR(100) NOT NULL);
+Query OK, 0 rows affected (1.77 sec)
+
+mysql> INSERT INTO department VALUES
+    -> (11, 'Sales'),
+    -> (12, 'Marketing'),
+    -> (13, 'Developer');
+Query OK, 3 rows affected (0.20 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE employee_department
+    -> (
+    -> emp_id INT REFERENCES employee(id),
+    -> department_id INT REFERENCES department(department_id));
+Query OK, 0 rows affected (1.13 sec)
+
+mysql> INSERT INTO employee_department VALUES
+    -> (101,13),
+    -> (102, 11),
+    -> (103, 12),
+    -> (103, 13);
+Query OK, 4 rows affected (0.42 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM company;
++------------+--------------+
+| company_id | company_name |
++------------+--------------+
+|          1 | AMAZON       |
+|          2 | FB           |
+|          3 | BL           |
++------------+--------------+
+3 rows in set (0.02 sec)
+
+mysql> SELECT * FROM employee;
++-----+------------+---------------+--------------+---------------+--------+
+| id  | company_id | employee_name | phone_number | address       | gender |
++-----+------------+---------------+--------------+---------------+--------+
+| 101 |          1 | Bill          |   9832781255 | California    | M      |
+| 102 |          2 | Charlie       |   7823129021 | NYC           | M      |
+| 103 |          3 | Terissa       |   8956328912 | San Francisco | F      |
++-----+------------+---------------+--------------+---------------+--------+
+3 rows in set (0.18 sec)
+
+mysql> SELECT * FROM department;
++---------------+-----------------+
+| department_id | department_name |
++---------------+-----------------+
+|            11 | Sales           |
+|            12 | Marketing       |
+|            13 | Developer       |
++---------------+-----------------+
+3 rows in set (0.03 sec)
+
+mysql> SELECT * FROM employee_department;
++--------+---------------+
+| emp_id | department_id |
++--------+---------------+
+|    101 |            13 |
+|    102 |            11 |
+|    103 |            12 |
+|    103 |            13 |
++--------+---------------+
+4 rows in set (0.00 sec)
