@@ -284,7 +284,7 @@ mysql> SELECT * FROM employee_payroll;
 4 rows in set (0.00 sec)
 
 
-//-------------------UC11-----------------------
+//---------------------UC11-------------------------
 
 mysql> CREATE TABLE employee
     -> (
